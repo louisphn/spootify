@@ -1,4 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# spootify
+
+A Spotify clone web application made with React.js and Typescript
+
+### Tecnologies in use
+
+- React
+- Next.js
+- Typescript
+- ESLint
+- Prettier
+- Spotify API
+
+For more details, see package.json file
 
 ## Getting Started
 
