@@ -1,17 +1,17 @@
-import { FC, useState, useEffect } from 'react'
-import Link from 'next/link'
-import { accessUrl } from 'lib/spotify'
+import React, { FC } from 'react'
 
 import styles from 'styles/components/login.module.scss'
 
-const Login: FC = () => {
+type Props = {
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+}
+
+const Login: FC<Props> = (props) => {
+  const { onClick } = props
+
   return (
     <div className={styles.login}>
-      <Link href={accessUrl}>
-        <a>
-          <button>Login to Spotify</button>
-        </a>
-      </Link>
+      <button onClick={onClick}>Login to Spotify</button>
     </div>
   )
 }
