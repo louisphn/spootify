@@ -1,24 +1,43 @@
-import { NextPage } from 'next'
-import { useEffect } from 'react'
-import { useAtom } from 'jotai'
+import { GetStaticProps } from 'next'
+import { useCallback } from 'react'
 
 import { Login } from 'components/Login'
-import { tokenAtom } from 'contexts/TokenContext'
 
-const Home: NextPage = () => {
-  const [token, setToken] = useAtom(tokenAtom)
+const Home = (props) => {
+  const { loginPath } = props
 
-  useEffect(() => {
-    const url = window.location.href
-    if (url.indexOf('_token') > -1) {
-      let access_token = url.split('_token=')[1].split('&')[0].trim()
-      setToken(access_token)
-    }
-  }, [])
+  const login = useCallback(() => {
+    window.location.href = loginPath
+  }, [loginPath])
 
-  console.log(token)
+  return <Login onClick={login} />
+}
 
-  return <>{token !== '' ? <a href={'/sample'}>'Welcome'</a> : <Login />}</>
+export const getStaticProps: GetStaticProps = async () => {
+  const scopes = [
+    'streaming',
+    'user-read-email',
+    'user-read-private',
+    'user-library-read',
+    'user-library-modify',
+    'user-read-currently-playing',
+    'user-read-recently-played',
+    'user-read-playback-state',
+    'user-read-playback-position',
+    'user-top-read',
+    'user-modify-playback-state',
+  ]
+
+  const params = new URLSearchParams()
+  params.append('client_id', process.env.REACT_APP_SPOTIFY_CLIENT_ID || '')
+  params.append('response_type', 'code')
+  params.append('redirect_uri', process.env.REACT_APP_SPOTIFY_REDIRECT_URI || '')
+  params.append('scope', scopes.join(' '))
+  params.append('state', 'state')
+  params.append('show_dialog', 'true')
+  return {
+    props: { loginPath: `https://accounts.spotify.com/authorize?${params.toString()}` },
+  }
 }
 
 export default Home
