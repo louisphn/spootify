@@ -1,0 +1,46 @@
+import { withIronSession } from 'next-iron-session'
+import queryString from 'query-string'
+import axios from 'axios'
+import { SpotifyAuthApiResponse } from 'types/AuthApiResponse'
+
+const authorize = async (req, res) => {
+  const { code, state } = req.query
+
+  const params = new URLSearchParams()
+  params.append('grant_type', 'authorization_code')
+  params.append('code', code as string)
+  params.append('redirect_uri', 'http://localhost:3000/api/auth/authorize')
+
+  const response = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${Buffer.from(
+        `${process.env.REACT_APP_SPOTIFY_CLIENT_ID}:${process.env.REACT_APP_SPOTIFY_CLIENT_SECRET}`,
+        'utf-8'
+      ).toString('base64')}`,
+    },
+    body: queryString.stringify({
+      grant_type: 'authorization_code',
+      code: code,
+      redirect_uri: `${process.env.REACT_APP_SPOTIFY_REDIRECT_URI}`,
+    }),
+  })
+
+  const result = await response.json()
+
+  console.log(result)
+
+  req.session.set('auth', {
+    accessToken: result.access_token,
+  })
+
+  await req.session.save()
+
+  res.status(200).redirect('/sample')
+}
+
+export default withIronSession(authorize, {
+  password: `${process.env.REACT_APP_AUTH_PASSWORD}`,
+  cookieName: 'access-token',
+})
