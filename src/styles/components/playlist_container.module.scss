@@ -1,0 +1,11 @@
+@import 'styles/variables.scss';
+
+.playlist_container {
+  @include mq('md') {
+    &::after {
+      content: '';
+      flex: 0 0 33%;
+      max-width: 25%;
+    }
+  }
+}

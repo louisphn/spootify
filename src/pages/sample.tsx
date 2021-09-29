@@ -8,37 +8,36 @@ import { SongCard } from 'components/Song'
 import { PlaylistContainer } from 'components/Playlist'
 import { Playlist } from 'types/Playlist'
 import { TrackItem } from 'types/Track'
-import { makeRequest, getNowPlaying } from 'lib/spotify'
+import { makeRequest, getNowPlaying, getCurrentUserPlaylists } from 'lib/spotify'
 import { Layout } from 'components/Layout'
 
 const Sample = (props) => {
   const { auth } = props
-
   const router = useRouter()
-  const fetcher = (url) => fetch(url).then((res) => res.json())
-  const { data, error } = useSWR('/api/nowplaying', fetcher)
 
-  const [featured, setFeatured] = useState<Playlist[]>([])
-  const [currentSong, setCurrentSong] = useState<TrackItem>(data?.item)
-
-  useEffect(() => {
+  const nowPlaying = useSWR('nowPlaying', () => getNowPlaying(auth.accessToken))
+  const userPlaylist = useSWR('userPlaylists', () => getCurrentUserPlaylists(auth.accessToken, 'me/playlists'))
+  const featuredPlaylist = useSWR('featuredPlaylists', () =>
     makeRequest(auth.accessToken, 'featured-playlists', 'playlists')
-      .then((res) => {
-        setFeatured(res)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-    setCurrentSong(data?.item)
-    console.log(data?.item)
-  }, [data])
+  )
 
-  console.log(data, error)
   return (
     <Layout pageTitle={'Spootify'} active={'Home'}>
-      {currentSong !== undefined && <SongCard track={currentSong} />}
-      {featured.length > 0 && <PlaylistContainer playlists={featured} />}
+      {nowPlaying.data && <SongCard track={nowPlaying.data} />}
+      {featuredPlaylist.data && (
+        <>
+          <h1 className="text-2xl font-bold py-8 md:ml-8">Featured Playlists</h1>
+          <PlaylistContainer playlists={featuredPlaylist.data} />
+        </>
+      )}
+      {userPlaylist?.data && (
+        <>
+          <h1 className="text-2xl font-bold py-8 md:ml-8">My Playlists</h1>
+          <PlaylistContainer playlists={userPlaylist.data} />
+        </>
+      )}
       <button
+        className="py-16"
         onClick={async () => {
           await axios.post('/api/auth/logout')
           router.push('/')

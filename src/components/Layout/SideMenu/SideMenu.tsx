@@ -10,7 +10,7 @@ const SideMenu: FC<Props> = (props) => {
   const width = `w-${items.length + 1}/12`
 
   return (
-    <nav className="overflow-hidden	flex h-1/6 bg-gradient-to-b from-green-500 via-green-700 to-green-900 w-full justify-center sm:w-3/12 sm:h-full sm:flex-col sm:justify-start sm:mr-16">
+    <nav className="overflow-hidden	flex h-1/6 bg-gradient-to-b from-green-500 via-green-700 to-green-900 w-full justify-center md:w-3/12 md:h-full md:flex-col md:justify-start md:mr-4">
       {items.map((item) => {
         return (
           <li

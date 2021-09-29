@@ -56,20 +56,32 @@ export const makeRequest = async (token, path, resourceType) => {
   return res.data[resourceType].items
 }
 
-// export const getNowPlaying = async (token) => {
-//   const res = await axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   })
-
-//   return res.data.item
-// }
-
 export const getNowPlaying = async (token) => {
-  return await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+  const res = await axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   })
+
+  return res.data.item
+}
+
+// in case using api path nowPlaying
+// export const getNowPlaying = async (token) => {
+//   return await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   })
+// }
+
+export const getCurrentUserPlaylists = async (token, api) => {
+  const res = await axios.get(`https://api.spotify.com/v1/${api}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  console.log(res)
+  return res.data.items
 }
