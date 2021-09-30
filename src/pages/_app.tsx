@@ -1,7 +1,7 @@
 import 'styles/base.scss' //scssのベーススタイル
 import 'tailwindcss/tailwind.css'
 import type { AppProps } from 'next/app'
-import useSWR, { SWRConfig } from 'swr'
+import { SWRConfig } from 'swr'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

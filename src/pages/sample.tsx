@@ -26,13 +26,13 @@ const Sample = (props) => {
       {nowPlaying.data && <SongCard track={nowPlaying.data} />}
       {featuredPlaylist.data && (
         <>
-          <h1 className="text-2xl font-bold py-8 md:ml-8">Featured Playlists</h1>
+          <h1 className="text-2xl font-bold py-8 md:pl-8">Featured Playlists</h1>
           <PlaylistContainer playlists={featuredPlaylist.data} />
         </>
       )}
       {userPlaylist?.data && (
         <>
-          <h1 className="text-2xl font-bold py-8 md:ml-8">My Playlists</h1>
+          <h1 className="text-2xl font-bold py-8 md:pl-8">My Playlists</h1>
           <PlaylistContainer playlists={userPlaylist.data} />
         </>
       )}
