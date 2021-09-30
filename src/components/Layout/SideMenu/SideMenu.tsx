@@ -15,12 +15,12 @@ const SideMenu: FC<Props> = (props) => {
   const userPlaylists: Playlist[] = cache.get('userPlaylists')
 
   return (
-    <nav className="overflow-scroll	flex h-1/6 bg-gradient-to-b from-green-500 via-green-700 to-green-900 w-full justify-center md:w-3/12 md:min-h-full md:flex-col md:justify-start md:pr-4">
+    <nav className="overflow-scroll	flex h-1/6 bg-gradient-to-b from-green-500 via-green-700 to-green-900 w-full justify-center md:w-3/12 md:min-h-full md:flex-col md:justify-start md:px-4">
       <div className="flex w-full md:flex-col md:h-4/6">
         {items.map((item) => {
           return (
             <li
-              className={`list-none flex align-center items-center rounded-lg h-full ${width} md:mx-auto md:my-4 md:pl-8 md:w-11/12 md:h-16  ${
+              className={`list-none flex align-center items-center rounded-lg h-full ${width} md:mx-auto md:my-4 md:pl-4 md:w-11/12 md:h-16  ${
                 active === item.name && 'bg-gray-300 bg-opacity-20'
               }`}
               key={item.name}
@@ -35,10 +35,10 @@ const SideMenu: FC<Props> = (props) => {
       <hr />
       {userPlaylists && (
         <div className="hidden md:block">
-          <hr />
+          <hr className="md:pl-8" />
           {userPlaylists.map((playlist) => (
             <li
-              className={`list-none flex align-center items-center rounded-lg h-full ${width} md:mx-auto md:my-4 md:pl-8 md:w-11/12 md:h-12 ${
+              className={`list-none flex align-center items-center rounded-lg h-full ${width} md:mx-auto md:my-4 md:pl-4 md:w-11/12 md:h-12 ${
                 active === playlist.name && 'bg-gray-300 bg-opacity-20'
               }`}
               key={playlist.name}

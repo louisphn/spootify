@@ -1,5 +1,6 @@
 import queryString from 'query-string'
 import axios from 'axios'
+import { SpotifyAuthApiResponse } from 'types/AuthApiResponse'
 
 // https://developer.spotify.com/documentation/web-playback-sdk/quick-start/#
 // export const authEndpoint = 'https://accounts.spotify.com/authorize'
@@ -82,6 +83,29 @@ export const getCurrentUserPlaylists = async (token, api) => {
     },
   })
 
-  console.log(res)
   return res.data.items
+}
+
+export const getCurrentUser = async (token) => {
+  const res = await axios.get(`https://api.spotify.com/v1/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  return res.data
+}
+
+export const getRefreshToken = async (refreshToken: string) => {
+  const clientBuffer = Buffer.from(`${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`, 'utf-8')
+  const params = new URLSearchParams()
+  params.append('grant_type', 'refresh_token')
+  params.append('refresh_token', refreshToken)
+  const response = await axios.post<SpotifyAuthApiResponse>('https://accounts.spotify.com/api/token', params, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${clientBuffer.toString('base64')}`,
+    },
+  })
+  return response.data
 }

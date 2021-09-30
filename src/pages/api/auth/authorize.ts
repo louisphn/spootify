@@ -1,6 +1,6 @@
 import { withIronSession } from 'next-iron-session'
 import queryString from 'query-string'
-import axios from 'axios'
+
 import { SpotifyAuthApiResponse } from 'types/AuthApiResponse'
 
 const authorize = async (req, res) => {
@@ -27,12 +27,11 @@ const authorize = async (req, res) => {
     }),
   })
 
-  const result = await response.json()
-
-  console.log(result)
+  const result: SpotifyAuthApiResponse = await response.json()
 
   req.session.set('auth', {
     accessToken: result.access_token,
+    refreshToken: result.refresh_token,
   })
 
   await req.session.save()

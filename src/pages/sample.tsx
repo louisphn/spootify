@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { withIronSession } from 'next-iron-session'
 import { useRouter } from 'next/router'
 import axios from 'axios'
@@ -6,8 +5,6 @@ import useSWR from 'swr'
 
 import { SongCard } from 'components/Song'
 import { PlaylistContainer } from 'components/Playlist'
-import { Playlist } from 'types/Playlist'
-import { TrackItem } from 'types/Track'
 import { makeRequest, getNowPlaying, getCurrentUserPlaylists } from 'lib/spotify'
 import { Layout } from 'components/Layout'
 
@@ -54,9 +51,9 @@ export const getServerSideProps = withIronSession(
     const auth = req.session.get('auth')
 
     if (!auth) {
-      res.statusCode = 404
-      res.end()
-      return { props: {} }
+      return {
+        props: {},
+      }
     }
 
     return {

@@ -1,7 +1,8 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import Head from 'next/head'
+
+import { Auth } from 'components/Auth'
 import { SideMenu } from 'components/Layout/SideMenu'
-import useRouter from 'next/router'
 
 type Props = {
   pageTitle: string
@@ -17,7 +18,7 @@ const Layout: FC<Props> = (props) => {
   ]
 
   return (
-    <>
+    <Auth>
       <Head>
         <title>{pageTitle}</title>
       </Head>
@@ -31,7 +32,7 @@ const Layout: FC<Props> = (props) => {
           {children}
         </div>
       </main>
-    </>
+    </Auth>
   )
 }
 

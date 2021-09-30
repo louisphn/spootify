@@ -18,7 +18,7 @@ const SongCard: VFC<Props> = (props) => {
           <p className={'font-bold'}>{track.name}</p>
           <div className={'flex flex-row'}>
             {track.artists.map((artist) => (
-              <p className={'mt-4'}>
+              <p className={'mt-4 text-left'}>
                 {artist.name}
                 {artist !== track.artists[track.artists.length - 1] && ', '}
               </p>
