@@ -11,8 +11,6 @@ const Auth: FC = ({ children }) => {
   const logIn = useSWR('/api/auth/checkLogin', fetcher)
   const user = useSWR(logIn && 'user', () => getCurrentUser(logIn.data.accessToken))
 
-  console.log(logIn)
-
   if (user.isValidating || logIn.isValidating) return <>Loading...</>
 
   if (logIn.data === undefined) {

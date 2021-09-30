@@ -5,8 +5,8 @@ import useSWR from 'swr'
 
 import { SongCard } from 'components/Song'
 import { PlaylistContainer } from 'components/Playlist'
-import { Layout } from 'components/Layout'
 import { makeRequest, getNowPlaying, getCurrentUserPlaylists } from 'lib/spotify'
+import { Layout } from 'components/Layout'
 
 const Sample = (props) => {
   const { auth } = props
@@ -49,6 +49,12 @@ const Sample = (props) => {
 export const getServerSideProps = withIronSession(
   async ({ req, res }) => {
     const auth = req.session.get('auth')
+
+    if (!auth) {
+      return {
+        props: {},
+      }
+    }
 
     return {
       props: { auth },
