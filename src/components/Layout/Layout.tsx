@@ -21,9 +21,15 @@ const Layout: FC<Props> = (props) => {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <main className="container overflow-hidden w-screen h-screen flex flex-col sm:flex-row">
+      <main className="overflow-hidden w-screen h-screen flex flex-col md:flex-row">
         <SideMenu items={nav} active={active} />
-        <div className={'container overflow-scroll w-full h-full pt-16'}>{children}</div>
+        <div
+          className={
+            'overflow-scroll w-full h-full bg-gradient-to-b from-gray-200 via-white to-gray-300 pt-16 md:pt-0 md:pr-12'
+          }
+        >
+          {children}
+        </div>
       </main>
     </>
   )
