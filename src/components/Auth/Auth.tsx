@@ -1,19 +1,25 @@
-import { FC } from 'react'
+import { useState, useEffect } from 'react'
+import { withIronSession } from 'next-iron-session'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
 import { getCurrentUser } from 'lib/spotify'
 
-const Auth: FC = ({ children }) => {
+const Auth = ({ children }) => {
   const router = useRouter()
+  const [refetch, setRefetch] = useState<boolean>(true)
 
   const fetcher = (url) => fetch(url).then((r) => r.json())
-  const logIn = useSWR('/api/auth/checkLogin', fetcher)
-  const user = useSWR(logIn && 'user', () => getCurrentUser(logIn.data.accessToken))
+  const logIn = useSWR(refetch ? '/api/auth/checkLogin' : null, fetcher)
+  const user = useSWR(logIn.data !== undefined ? 'user' : null, () => getCurrentUser(logIn.data.accessToken))
+
+  useEffect(() => {
+    setRefetch(true)
+  }, [])
 
   if (user.isValidating || logIn.isValidating) return <>Loading...</>
 
-  if (logIn.data === undefined) {
+  if (refetch && logIn.data === undefined) {
     router.push('/')
     return <></>
   }

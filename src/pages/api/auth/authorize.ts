@@ -36,7 +36,7 @@ const authorize = async (req, res) => {
 
   await req.session.save()
 
-  res.status(200).redirect('/sample')
+  res.status(200).redirect('/dashboard')
 }
 
 export default withIronSession(authorize, {

@@ -18,7 +18,7 @@ const checkLogin = async (req, res) => {
         })
         await req.session.save()
         res.status(200)
-        res.json({ accessToken: response.access_token })
+        res.json({ accessToken: response.access_token, refreshToken: response.refresh_token })
       } else {
         res.status(401)
         res.json({ message: 'unauthorized' })
