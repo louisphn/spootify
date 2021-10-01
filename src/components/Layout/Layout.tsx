@@ -13,8 +13,8 @@ const Layout: FC<Props> = (props) => {
   const { pageTitle, active, children } = props
   const nav = [
     { name: 'Home', path: '#' },
-    { name: 'Featured Playlists', path: '#' },
     { name: 'Browse', path: '#' },
+    { name: 'Your Library', path: '#' },
   ]
 
   return (
@@ -22,11 +22,11 @@ const Layout: FC<Props> = (props) => {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <main className="overflow-hidden w-screen h-screen flex flex-col md:flex-row">
+      <main style={{ minHeight: '768px' }} className="overflow-hidden w-screen h-screen flex flex-col lg:flex-row">
         <SideMenu items={nav} active={active} />
         <div
           className={
-            'overflow-scroll w-full h-full bg-gradient-to-b from-gray-200 via-white to-gray-300 pt-16 md:pt-0 md:pr-12'
+            'overflow-scroll w-full h-full bg-gradient-to-t from-green-600 via-green-700 to-gray-800 py-16 lg:py-0 lg:pb-16 lg:pr-12'
           }
         >
           {children}
