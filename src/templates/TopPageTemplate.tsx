@@ -19,9 +19,9 @@ const TopPageTemplate: FC<Props> = (props) => {
   const currentTime = today.getHours()
 
   return (
-    <section className="relative flex flex-col items-center px-4 lg:block lg:mx-0">
+    <section className="relative flex flex-col items-center px-4 lg:block lg:mx-0 lg:pr-12">
       <button
-        className="py-2 w-32 font-bold rounded-xl tracking-widest bg-green-500 text-gray-50 p-8 mb-12 lg:mb-0 lg:absolute lg:top-6 lg:right-2"
+        className="py-2 w-32 font-bold rounded-xl tracking-widest bg-green-500 text-gray-50 p-8 mb-12 lg:mb-0 lg:absolute lg:top-6 lg:right-8"
         onClick={async () => {
           await axios.post('/api/auth/logout')
           router.push('/')

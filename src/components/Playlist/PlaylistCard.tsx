@@ -3,13 +3,15 @@ import { VFC } from 'react'
 type Props = {
   name: string
   image: string
+  onClick?: () => void
 }
 
 const PlaylistCard: VFC<Props> = (props) => {
-  const { name, image } = props
+  const { name, image, onClick } = props
 
   return (
     <div
+      onClick={onClick}
       className={
         'bg-white bg-opacity-10 shadow-sm container flex flex-row items-center h-32 md:h-40 lg:w-3/12 lg:h-32 lg:opacity-90 lg:hover:opacity-100 lg:hover:shadow-lg lg:p-4 lg:cursor-pointer'
       }

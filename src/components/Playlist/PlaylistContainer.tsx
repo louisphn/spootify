@@ -1,4 +1,5 @@
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
+import { useRouter } from 'next/router'
 
 import { PlaylistCard } from 'components/Playlist'
 import { Playlist } from 'types/Playlist'
@@ -12,6 +13,11 @@ type Props = {
 
 const PlaylistContainer: FC<Props> = (props) => {
   const { playlists, title } = props
+  const router = useRouter()
+
+  const handleClick = useCallback((playlistId: string) => {
+    router.push(`dashboard/${playlistId}`)
+  }, [])
 
   return (
     <div className="w-full md:w-8/12 lg:w-full lg:pt-8">
@@ -23,6 +29,7 @@ const PlaylistContainer: FC<Props> = (props) => {
           {playlists.map((playlist) => {
             return (
               <PlaylistCard
+                onClick={() => handleClick(playlist.id)}
                 key={playlist.id}
                 image={playlist.images[0]?.url || '/thumbnail.jpg'}
                 name={playlist.name}
