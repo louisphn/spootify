@@ -8,6 +8,6 @@ module.exports = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ['mosaic.scdn.co'],
+    domains: ['mosaic.scdn.co', 'i.scdn.co'],
   },
 }

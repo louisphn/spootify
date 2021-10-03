@@ -86,6 +86,15 @@ export const getCurrentUserPlaylists = async (token, api) => {
   return res.data.items
 }
 
+export const getPlaylistTracks = async (token, api) => {
+  const res = await axios.get(`https://api.spotify.com/v1/${api}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  return res.data
+}
 export const getCurrentUser = async (token) => {
   const res = await axios.get(`https://api.spotify.com/v1/me`, {
     headers: {
