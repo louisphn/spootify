@@ -8,15 +8,19 @@ import styles from 'styles/components/playlist_container.module.scss'
 
 type Props = {
   playlists: Playlist[]
+  type: 'album' | 'playlist'
   title?: string
 }
 
 const PlaylistContainer: FC<Props> = (props) => {
-  const { playlists, title } = props
+  const { playlists, type, title } = props
   const router = useRouter()
 
   const handleClick = useCallback((playlistId: string) => {
-    router.push(`dashboard/${playlistId}`)
+    router.push({
+      pathname: '/dashboard/[playlistId]/[album]',
+      query: type === 'playlist' ? { playlistId: playlistId, album: false } : { playlistId: playlistId, album: true },
+    })
   }, [])
 
   return (

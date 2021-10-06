@@ -82,7 +82,6 @@ export const getCurrentUserPlaylists = async (token, api) => {
       Authorization: `Bearer ${token}`,
     },
   })
-
   return res.data.items
 }
 

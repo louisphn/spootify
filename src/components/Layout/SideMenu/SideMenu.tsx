@@ -15,13 +15,15 @@ const SideMenu: FC<Props> = (props) => {
   const { cache } = useSWRConfig()
   const auth = cache.get('/api/auth/checkLogin')
   const token = auth.accessToken
-  const userPlaylists = useSWR('userPlaylists', () => getCurrentUserPlaylists(token, 'me/playlists'))
+  const userPlaylists = useSWR('userPlaylists', () => getCurrentUserPlaylists(token, 'me/playlists'), {
+    revalidateOnFocus: false,
+  })
 
   if (userPlaylists.isValidating) return <>Loading...</>
 
   return (
-    <nav className="overflow-scroll	flex h-1/6 bg-gradient-to-l from-green-600 via-green-700 to-green-800  w-full justify-center lg:w-3/12 lg:min-h-full lg:flex-col lg:justify-start lg:px-4">
-      <div className="flex w-full lg:flex-col lg:h-4/6">
+    <nav className="overflow-scroll	flex h-1/6 bg-gradient-to-l from-green-600 via-green-700 to-green-800  w-full justify-center lg:w-3/12 lg:min-h-full lg:flex-col lg:justify-start lg:items-start lg:px-4">
+      <div className="flex w-full lg:flex-col lg:h-96">
         {items.map((item) => {
           return (
             <li
@@ -36,11 +38,10 @@ const SideMenu: FC<Props> = (props) => {
             </li>
           )
         })}
+        {userPlaylists && <hr className="lg:pl-8" />}
       </div>
-      <hr />
       {userPlaylists && (
-        <div className="hidden lg:block">
-          <hr className="lg:pl-8" />
+        <div className="hidden lg:block lg:h-full">
           {userPlaylists.data.map((playlist) => (
             <li
               className={`list-none flex align-center items-center rounded-lg h-full ${width} lg:mx-auto lg:my-4 lg:pl-4 lg:w-11/12 lg:h-12 ${

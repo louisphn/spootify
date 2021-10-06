@@ -7,11 +7,15 @@ import { getAsString } from 'lib/helper'
 
 const Playlist: NextPage = () => {
   const router = useRouter()
-  const { playlistId } = router.query
+  const { playlistId, album } = router.query
 
   return (
     <Layout pageTitle={'Spootify'} active={''}>
-      <PlaylistDetailContainer playlistId={getAsString(playlistId)} />
+      {getAsString(album) === 'true' ? (
+        <PlaylistDetailContainer playlistId={getAsString(playlistId)} type={'album'} />
+      ) : (
+        <PlaylistDetailContainer playlistId={getAsString(playlistId)} type={'playlist'} />
+      )}
     </Layout>
   )
 }

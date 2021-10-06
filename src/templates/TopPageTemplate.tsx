@@ -32,8 +32,10 @@ const TopPageTemplate: FC<Props> = (props) => {
       <p className="text-white font-bold text-3xl lg:pl-8 lg:pt-16">
         Good {currentTime < 12 ? 'Morning' : currentTime < 18 ? 'Afternoon' : 'Evening'}, {username}
       </p>
-      {myPlaylist && <PlaylistContainer title={'My Playlists'} playlists={myPlaylist} />}
-      {featuredPlaylist && <PlaylistContainer title={'Featured Playlists'} playlists={featuredPlaylist} />}
+      {myPlaylist && <PlaylistContainer title={'My Playlists'} type={'playlist'} playlists={myPlaylist} />}
+      {featuredPlaylist && (
+        <PlaylistContainer title={'Featured Playlists'} type={'playlist'} playlists={featuredPlaylist} />
+      )}
     </section>
   )
 }
