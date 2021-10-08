@@ -13,7 +13,7 @@ const Layout: FC<Props> = (props) => {
   const { pageTitle, active, children } = props
   const nav = [
     { name: 'Home', path: '/dashboard' },
-    { name: 'Browse', path: '#' },
+    { name: 'Browse', path: '/dashboard/browse' },
     { name: 'Your Library', path: '#' },
   ]
 

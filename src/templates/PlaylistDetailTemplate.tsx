@@ -1,14 +1,19 @@
 import { FC } from 'react'
 
 import { SongContainer } from 'components/Song'
+import { TextArea } from 'components/Texts'
 import { PlaylistTracks } from 'types/PlaylistTracks'
+import { AlbumTracks } from 'types/AlbumTracks'
 
 type Props = {
-  playlist: PlaylistTracks
+  playlist: PlaylistTracks | AlbumTracks
+  type: 'album' | 'playlist'
 }
 
 const PlaylistDetailTemplate: FC<Props> = (props) => {
-  const { playlist } = props
+  const { playlist, type } = props
+
+  console.log(playlist)
 
   return (
     <div className="w-full flex flex-col">
@@ -16,11 +21,14 @@ const PlaylistDetailTemplate: FC<Props> = (props) => {
         <div className="flex flex-col overflow-hidden items-center w-full">
           <h1 className={'text-white font-bold lg:mt-12 lg:mb-4 lg:text-2xl'}>{playlist.name}</h1>
           <img
-            className={'w-11/12 my-8 object-cover object-center lg:w-3/12 lg:my-4'}
+            className={'w-11/12 my-8 object-cover object-center lg:w-3/12 lg:my-4 lg:mb-8'}
             src={playlist.images[0]?.url || '/thumbnail.jpg'}
           />
-          {playlist.description && (
-            <p className={'text-white mb-4 text-center lg:mt-4 lg:mb-8'}>{playlist.description}</p>
+          {type === 'playlist' && (playlist as PlaylistTracks).description && (
+            <TextArea
+              text={(playlist as PlaylistTracks).description}
+              className={'text-white mb-4 text-center lg:mb-8'}
+            />
           )}
         </div>
       </div>
@@ -31,7 +39,7 @@ const PlaylistDetailTemplate: FC<Props> = (props) => {
           <p className={'lg:font-bold lg:text-white lg:w-2/12 ml-4 mr-8'}>Duration</p>
         </div>
       </div>
-      <SongContainer playlist={playlist} />
+      <SongContainer playlist={playlist} type={type} />
     </div>
   )
 }

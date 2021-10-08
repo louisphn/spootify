@@ -13,10 +13,13 @@ export type PlaylistTracks = {
   href: string
   id: string
   images: {
+    height: number | null
     url: string
+    width: number | null
   }[]
   name: string
   owner: {
+    display_name: string
     external_urls: {
       spotify: string
     }
@@ -25,6 +28,7 @@ export type PlaylistTracks = {
     type: string
     uri: string
   }
+  primary_color: string | null
   public: null
   snapshot_id: string
   tracks: {
@@ -44,9 +48,9 @@ export type PlaylistTracks = {
       track: TrackItem
     }[]
     limit: number
-    next: string
+    next: string | null
     offset: number
-    previous: null
+    previous: string | null
     total: number
   }
   type: string
