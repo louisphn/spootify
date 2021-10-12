@@ -76,7 +76,7 @@ export const getNowPlaying = async (token) => {
 //   })
 // }
 
-export const getCurrentUserPlaylists = async (token, api) => {
+export const getDataItems = async (token, api) => {
   const res = await axios.get(`https://api.spotify.com/v1/${api}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -85,7 +85,7 @@ export const getCurrentUserPlaylists = async (token, api) => {
   return res.data.items
 }
 
-export const getPlaylistTracks = async (token, api) => {
+export const getData = async (token, api) => {
   const res = await axios.get(`https://api.spotify.com/v1/${api}`, {
     headers: {
       Authorization: `Bearer ${token}`,

@@ -2,7 +2,7 @@ import { FC } from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 
 import { PlaylistDetailTemplate } from 'templates'
-import { getPlaylistTracks } from 'lib/spotify'
+import { getData } from 'lib/spotify'
 
 type Props = {
   playlistId: string
@@ -16,7 +16,7 @@ const PlaylistDetailContainer: FC<Props> = (props) => {
   const auth = cache.get('/api/auth/checkLogin')
   const token = auth.accessToken
 
-  const currentPlaylist = useSWR(`${playlistId}`, () => getPlaylistTracks(token, `${type}s/${playlistId}`))
+  const currentPlaylist = useSWR(`${playlistId}`, () => getData(token, `${type}s/${playlistId}`))
 
   if (currentPlaylist.isValidating) return <>Loading...</>
 

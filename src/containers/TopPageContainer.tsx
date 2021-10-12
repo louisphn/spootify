@@ -2,7 +2,7 @@ import { FC } from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 
 import { TopPageTemplate } from 'templates'
-import { makeRequest, getCurrentUserPlaylists } from 'lib/spotify'
+import { makeRequest, getDataItems } from 'lib/spotify'
 
 const TopPageContainer: FC = () => {
   const { cache } = useSWRConfig()
@@ -10,12 +10,10 @@ const TopPageContainer: FC = () => {
   const user = cache.get('user')
   const token = auth.accessToken
 
-  const userPlaylist = useSWR('userPlaylists', () => getCurrentUserPlaylists(token, 'me/playlists'))
+  const userPlaylist = useSWR('userPlaylists', () => getDataItems(token, 'me/playlists'))
   const featuredPlaylist = useSWR('featuredPlaylists', () => makeRequest(token, 'featured-playlists', 'playlists'))
 
   if (userPlaylist.isValidating || featuredPlaylist.isValidating) return <>Loading...</>
-
-  console.log(user)
 
   return (
     <>
