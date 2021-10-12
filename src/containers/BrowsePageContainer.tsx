@@ -2,7 +2,7 @@ import { FC } from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 
 import { BrowsePageTemplate } from 'templates'
-import { getPlaylistTracks } from 'lib/spotify'
+import { getData } from 'lib/spotify'
 
 const BrowsePageContainer: FC = () => {
   const { cache } = useSWRConfig()
@@ -10,7 +10,7 @@ const BrowsePageContainer: FC = () => {
   const auth = cache.get('/api/auth/checkLogin')
   const token = auth.accessToken
 
-  const categories = useSWR('recommendCategories', () => getPlaylistTracks(token, 'browse/categories'), {
+  const categories = useSWR('recommendCategories', () => getData(token, 'browse/categories'), {
     revalidateOnFocus: false,
   })
 

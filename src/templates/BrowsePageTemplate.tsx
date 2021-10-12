@@ -6,7 +6,7 @@ import { SongCard } from 'components/Song'
 import { SearchBar } from 'components/SearchBar'
 import { PlaylistContainer } from 'components/Playlist'
 import { useStringChangeEvent } from 'lib/customHooks'
-import { getPlaylistTracks } from 'lib/spotify'
+import { getData } from 'lib/spotify'
 import { TrackItem } from 'types/Track'
 import { Playlist } from 'types/Playlist'
 
@@ -27,7 +27,7 @@ const BrowsePageTemplate: FC<Props> = (props) => {
 
   const searchData = useSWR(
     fetch ? 'searchData' : null,
-    () => getPlaylistTracks(token, `search?q=${query}&type=track%2Calbum%2Cplaylist&market=JP&limit=5`),
+    () => getData(token, `search?q=${query}&type=track%2Calbum%2Cplaylist&market=JP&limit=5`),
     {
       onSuccess: (data) => {
         setAlbums(data.albums.items)

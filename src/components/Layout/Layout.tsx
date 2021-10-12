@@ -14,7 +14,7 @@ const Layout: FC<Props> = (props) => {
   const nav = [
     { name: 'Home', path: '/dashboard' },
     { name: 'Browse', path: '/dashboard/browse' },
-    { name: 'Your Library', path: '#' },
+    { name: 'Your Library', path: '/dashboard/library' },
   ]
 
   return (

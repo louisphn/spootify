@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 
-import { getCurrentUserPlaylists } from 'lib/spotify'
+import { getDataItems } from 'lib/spotify'
 
 type Props = {
   items: { name: string; path: string }[]
@@ -15,7 +15,7 @@ const SideMenu: FC<Props> = (props) => {
   const { cache } = useSWRConfig()
   const auth = cache.get('/api/auth/checkLogin')
   const token = auth.accessToken
-  const userPlaylists = useSWR('userPlaylists', () => getCurrentUserPlaylists(token, 'me/playlists'), {
+  const userPlaylists = useSWR('userPlaylists', () => getDataItems(token, 'me/playlists'), {
     revalidateOnFocus: false,
   })
 
