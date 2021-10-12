@@ -2,6 +2,7 @@ import { FC } from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 
 import { getDataItems } from 'lib/spotify'
+import styles from 'styles/components/layout.module.scss'
 
 type Props = {
   items: { name: string; path: string }[]
@@ -22,7 +23,9 @@ const SideMenu: FC<Props> = (props) => {
   if (userPlaylists.isValidating) return <>Loading...</>
 
   return (
-    <nav className="overflow-scroll	flex h-1/6 bg-gradient-to-l from-green-600 via-green-700 to-green-800  w-full justify-center lg:w-3/12 lg:min-h-full lg:flex-col lg:justify-start lg:items-start lg:px-4">
+    <nav
+      className={`${styles.layout_nav} overflow-scroll	flex h-1/6 bg-gradient-to-l from-green-600 via-green-700 to-green-800  w-full justify-center lg:w-3/12 lg:flex-col lg:justify-start lg:items-start lg:px-4`}
+    >
       <div className="flex w-full lg:flex-col lg:h-96">
         {items.map((item) => {
           return (

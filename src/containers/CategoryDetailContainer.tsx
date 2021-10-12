@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import useSWR, { useSWRConfig } from 'swr'
 
 import { CategoryDetailTemplate } from 'templates'
-import { getPlaylistTracks } from 'lib/spotify'
+import { getData } from 'lib/spotify'
 import { getAsString } from 'lib/helper'
 
 type Props = {
@@ -18,8 +18,10 @@ const CategoryDetailContainer: FC<Props> = (props) => {
   const auth = cache.get('/api/auth/checkLogin')
   const token = auth.accessToken
 
-  const categoryPlaylists = useSWR('categoryPlaylists', () =>
-    getPlaylistTracks(token, `browse/categories/${categoryId}/playlists`)
+  const categoryPlaylists = useSWR(
+    'categoryPlaylists',
+    () => getData(token, `browse/categories/${categoryId}/playlists`),
+    { revalidateOnFocus: false }
   )
 
   if (categoryPlaylists.isValidating) return <>Loading...</>

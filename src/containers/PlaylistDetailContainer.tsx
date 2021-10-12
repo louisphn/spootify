@@ -16,7 +16,9 @@ const PlaylistDetailContainer: FC<Props> = (props) => {
   const auth = cache.get('/api/auth/checkLogin')
   const token = auth.accessToken
 
-  const currentPlaylist = useSWR(`${playlistId}`, () => getData(token, `${type}s/${playlistId}`))
+  const currentPlaylist = useSWR(`${playlistId}`, () => getData(token, `${type}s/${playlistId}`), {
+    revalidateOnFocus: false,
+  })
 
   if (currentPlaylist.isValidating) return <>Loading...</>
 

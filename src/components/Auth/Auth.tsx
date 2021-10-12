@@ -10,8 +10,10 @@ const Auth = ({ children }) => {
   const [refetch, setRefetch] = useState<boolean>(true)
 
   const fetcher = (url) => fetch(url).then((r) => r.json())
-  const logIn = useSWR(refetch ? '/api/auth/checkLogin' : null, fetcher)
-  const user = useSWR(logIn.data !== undefined ? 'user' : null, () => getCurrentUser(logIn.data.accessToken))
+  const logIn = useSWR(refetch ? '/api/auth/checkLogin' : null, fetcher, { revalidateOnFocus: false })
+  const user = useSWR(logIn.data !== undefined ? 'user' : null, () => getCurrentUser(logIn.data.accessToken), {
+    revalidateOnFocus: false,
+  })
 
   useEffect(() => {
     setRefetch(true)
