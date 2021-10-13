@@ -1,4 +1,5 @@
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
+import { useRouter } from 'next/router'
 import useSWR, { useSWRConfig } from 'swr'
 
 import { getDataItems } from 'lib/spotify'
@@ -11,6 +12,7 @@ type Props = {
 
 const SideMenu: FC<Props> = (props) => {
   const { items, active } = props
+  const router = useRouter()
   const width = `w-${items.length + 1}/12`
 
   const { cache } = useSWRConfig()
@@ -44,19 +46,24 @@ const SideMenu: FC<Props> = (props) => {
         {userPlaylists && <hr className="lg:pl-8" />}
       </div>
       {userPlaylists && (
-        <div className="hidden lg:block lg:h-full">
-          {userPlaylists.data.map((playlist) => (
-            <li
-              className={`list-none flex align-center items-center rounded-lg h-full ${width} lg:mx-auto lg:my-4 lg:pl-4 lg:w-11/12 lg:h-12 ${
-                active === playlist.name && 'bg-gray-300 bg-opacity-20'
-              }`}
-              key={playlist.name}
-            >
-              <a className="w-full" href={playlist.uri}>
+        <div className="hidden lg:block lg:h-full lg:mb-8">
+          {userPlaylists.data &&
+            userPlaylists.data.map((playlist) => (
+              <li
+                onClick={() => {
+                  router.push({
+                    pathname: '/dashboard/[playlistId]/[album]',
+                    query: { playlistId: playlist.id, album: false },
+                  })
+                }}
+                className={`cursor-pointer list-none flex align-center items-center rounded-lg h-full ${width} lg:mx-auto lg:my-4 lg:pl-4 lg:w-11/12 lg:h-12 ${
+                  active === playlist.name && 'bg-gray-300 bg-opacity-20'
+                }`}
+                key={playlist.name}
+              >
                 <p className="w-full text-center text-gray-50 tracking-widest lg:text-left">{playlist.name}</p>
-              </a>
-            </li>
-          ))}
+              </li>
+            ))}
         </div>
       )}
     </nav>

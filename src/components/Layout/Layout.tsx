@@ -46,7 +46,7 @@ const Layout: FC<Props> = (props) => {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <main style={{ minHeight: '768px' }} className="overflow-hidden w-screen h-screen flex flex-col">
+      <main className={`${styles.layout_height} overflow-hidden w-screen h-screen flex flex-col`}>
         <div className="w-full h-full flex flex-col lg:flex-row">
           <SideMenu items={nav} active={active} />
           <div

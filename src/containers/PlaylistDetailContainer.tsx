@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState, useEffect } from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 
 import { PlaylistDetailTemplate } from 'templates'
@@ -20,7 +20,7 @@ const PlaylistDetailContainer: FC<Props> = (props) => {
     revalidateOnFocus: false,
   })
 
-  if (currentPlaylist.isValidating) return <>Loading...</>
+  if (currentPlaylist.isValidating || currentPlaylist.data === undefined) return <>Loading...</>
 
   return <PlaylistDetailTemplate playlist={currentPlaylist.data} type={type} />
 }

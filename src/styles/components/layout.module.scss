@@ -4,13 +4,13 @@
   &_height {
     height: calc(100vh - 272px);
     @include mq('lg') {
-      height: calc(100vh - 72px); // spotify web player height is 72px
+      height: calc(100vh - 75px); // spotify web player height is 72px
     }
   }
   &_nav {
     height: 128px;
     @include mq('lg') {
-      height: calc(100vh - 72px);
+      height: calc(100vh - 75px);
     }
   }
 }

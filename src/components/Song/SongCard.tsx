@@ -40,7 +40,7 @@ const SongCard: VFC<Props> = (props) => {
         <div className={'w-full flex h-40 flex-col justify-center ml-4 sm:w-11/12 sm:h-full sm:ml-8'}>
           <p className={'font-bold text-white lg:h-12 line-clamp-2'}>{track.name}</p>
           <div className={'flex flex-row flex-wrap lg:h-16 break-all line-clamp-2'}>
-            <p className={'mt-4 text-left lg:h-full text-white break-all'}>
+            <p className={'mt-4 text-left lg:h-full text-white break-word'}>
               {track.artists &&
                 track.artists.map((artist) => (
                   <>
