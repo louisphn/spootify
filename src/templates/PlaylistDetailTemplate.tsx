@@ -13,8 +13,6 @@ type Props = {
 const PlaylistDetailTemplate: FC<Props> = (props) => {
   const { playlist, type } = props
 
-  console.log(playlist)
-
   return (
     <div className="w-full flex flex-col">
       <div className="w-full">

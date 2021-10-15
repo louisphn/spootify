@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState, useEffect } from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 
 import { PlaylistDetailTemplate } from 'templates'
@@ -16,9 +16,11 @@ const PlaylistDetailContainer: FC<Props> = (props) => {
   const auth = cache.get('/api/auth/checkLogin')
   const token = auth.accessToken
 
-  const currentPlaylist = useSWR(`${playlistId}`, () => getData(token, `${type}s/${playlistId}`))
+  const currentPlaylist = useSWR(`${playlistId}`, () => getData(token, `${type}s/${playlistId}`), {
+    revalidateOnFocus: false,
+  })
 
-  if (currentPlaylist.isValidating) return <>Loading...</>
+  if (currentPlaylist.isValidating || currentPlaylist.data === undefined) return <>Loading...</>
 
   return <PlaylistDetailTemplate playlist={currentPlaylist.data} type={type} />
 }

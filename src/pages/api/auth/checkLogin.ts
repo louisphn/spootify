@@ -3,6 +3,7 @@ import axios from 'axios'
 import { getRefreshToken } from 'lib/spotify'
 
 const checkLogin = async (req, res) => {
+  console.log(req.session.get('auth'))
   try {
     const { accessToken, refreshToken } = req.session.get('auth')
     try {
@@ -32,6 +33,6 @@ const checkLogin = async (req, res) => {
 }
 
 export default withIronSession(checkLogin, {
-  password: `${process.env.REACT_APP_AUTH_PASSWORD}`,
+  password: `${process.env.NEXT_PUBLIC_AUTH_PASSWORD}`,
   cookieName: 'access-token',
 })

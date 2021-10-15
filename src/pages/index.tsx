@@ -29,9 +29,9 @@ export const getStaticProps: GetStaticProps = async () => {
   ]
 
   const params = new URLSearchParams()
-  params.append('client_id', process.env.REACT_APP_SPOTIFY_CLIENT_ID || '')
+  params.append('client_id', process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID || '')
   params.append('response_type', 'code')
-  params.append('redirect_uri', process.env.REACT_APP_SPOTIFY_REDIRECT_URI || '')
+  params.append('redirect_uri', process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI || '')
   params.append('scope', scopes.join(' '))
   params.append('state', 'state')
   params.append('show_dialog', 'true')

@@ -11,6 +11,6 @@ const logOut = async (req, res) => {
 }
 
 export default withIronSession(logOut, {
-  password: `${process.env.REACT_APP_AUTH_PASSWORD}`,
+  password: `${process.env.NEXT_PUBLIC_AUTH_PASSWORD}`,
   cookieName: 'access-token',
 })

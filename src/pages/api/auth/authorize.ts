@@ -16,14 +16,14 @@ const authorize = async (req, res) => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: `Basic ${Buffer.from(
-        `${process.env.REACT_APP_SPOTIFY_CLIENT_ID}:${process.env.REACT_APP_SPOTIFY_CLIENT_SECRET}`,
+        `${process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID}:${process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET}`,
         'utf-8'
       ).toString('base64')}`,
     },
     body: queryString.stringify({
       grant_type: 'authorization_code',
       code: code,
-      redirect_uri: `${process.env.REACT_APP_SPOTIFY_REDIRECT_URI}`,
+      redirect_uri: `${process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI}`,
     }),
   })
 
@@ -40,6 +40,6 @@ const authorize = async (req, res) => {
 }
 
 export default withIronSession(authorize, {
-  password: `${process.env.REACT_APP_AUTH_PASSWORD}`,
+  password: `${process.env.NEXT_PUBLIC_AUTH_PASSWORD}`,
   cookieName: 'access-token',
 })

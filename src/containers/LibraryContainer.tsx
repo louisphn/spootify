@@ -11,8 +11,10 @@ const LibraryContainer: FC = () => {
   const token = auth.accessToken
 
   console.log(token)
-  const userPlaylist = useSWR('userPlaylists', () => getDataItems(token, 'me/playlists'))
-  const savedTracks = useSWR('savedTracks', () => getDataItems(token, 'me/tracks?limit=50'))
+  const userPlaylist = useSWR('userPlaylists', () => getDataItems(token, 'me/playlists'), { revalidateOnFocus: false })
+  const savedTracks = useSWR('savedTracks', () => getDataItems(token, 'me/tracks?limit=50'), {
+    revalidateOnFocus: false,
+  })
 
   if (userPlaylist.isValidating || savedTracks.isValidating) return <>Loading...</>
 
