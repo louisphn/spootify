@@ -2,7 +2,7 @@
 
 .layout {
   &_height {
-    height: calc(100vh - 272px);
+    height: calc(100vh - 272px); // spotify web player height is 72px
     @include mq('lg') {
       height: calc(100vh - 75px); // spotify web player height is 72px
     }
