@@ -2,6 +2,7 @@ module.exports = {
   purge: {
     content: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
     safelist: [
+      'bg-gray-200',
       'bg-gray-300',
       'bg-red-300',
       'bg-yellow-300',
@@ -27,6 +28,10 @@ module.exports = {
       'lg:mt-12',
       'lg:mb-4',
       'lg:mb-0 ',
+      'p-8',
+      'py-2',
+      'text-gray-50',
+      'rounded-xl',
     ],
   },
   darkMode: false, // or 'media' or 'class'
