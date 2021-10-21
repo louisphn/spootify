@@ -1,6 +1,14 @@
 # spootify
 
-A Spotify clone web application made with React.js and Typescript
+A Spotify clone web application made with React.js and Typescript.
+
+Demo: shorturl.at/qxAGM
+
+Please inform me your full name and email adress using for Spotify account in case of testing application
+via my email: louisphn@gmail.com
+
+アプリを試しために氏名とメールアドレスを私のメールアドレス宛にお送りお願いします。
+メールアドレス：louisphn@gmail.com
 
 ### Tecnologies in use
 
