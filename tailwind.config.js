@@ -32,6 +32,8 @@ module.exports = {
       'py-2',
       'text-gray-50',
       'rounded-xl',
+      'text-3xl',
+      'lg:pt-16',
     ],
   },
   darkMode: false, // or 'media' or 'class'
