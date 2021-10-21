@@ -8,7 +8,7 @@ via my email: louisphn@gmail.com
 アプリを試しために氏名とメールアドレスを私のメールアドレス宛にお送りお願いします。
 メールアドレス：louisphn@gmail.com
 
-### Tecnologies in use
+### Technologies in use
 
 - React
 - Next.js
@@ -16,6 +16,7 @@ via my email: louisphn@gmail.com
 - ESLint
 - Prettier
 - Spotify API
+- TailwindCSS
 
 For more details, see package.json file
 
