@@ -46,7 +46,7 @@ const SideMenu: FC<Props> = (props) => {
         {userPlaylists && <hr className="lg:pl-8" />}
       </div>
       {userPlaylists && (
-        <div className="hidden lg:block lg:h-full lg:mb-8">
+        <div className="hidden lg:w-full lg:block lg:h-full lg:mb-8">
           {userPlaylists.data &&
             userPlaylists.data.map((playlist) => (
               <li
